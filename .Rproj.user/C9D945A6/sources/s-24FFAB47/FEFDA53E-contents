@@ -1,5 +1,5 @@
 book_filename: 'bookdown_redes'
-repo: https://github.com/rubenfcasal/bookdown_intro
+repo: https://github.com/IsaacAPM/bookdown_redes
 output_dir: docs
 new_session: no
 language:
