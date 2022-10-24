@@ -3,7 +3,7 @@
     "path": "~/Documentos/Notas_Redes/Notas_Redes_Bookdown/01-intro.Rmd",
     "project_path": "01-intro.Rmd",
     "type": "r_markdown",
-    "hash": "3237303681",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1666570020037.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "106,706",
-        "scrollLine": "107"
+        "cursorPosition": "175,0",
+        "scrollLine": "171"
     },
     "folds": "",
-    "lastKnownWriteTime": 1666577802,
+    "lastKnownWriteTime": 1666580989,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1666577802320,
+    "last_content_update": 1666580989317,
     "read_only": false,
     "read_only_alternatives": []
 }

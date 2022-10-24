@@ -311,6 +311,67 @@ Figura 1.2: <em>Señal senoidal.</em>
 </div>
 <div id="conversión-analógica-a-digital-ad" class="section level3 hasAnchor" number="1.1.4">
 <h3><span class="header-section-number">1.1.4</span> Conversión analógica a digital (A/D)<a href="intro.html#conversión-analógica-a-digital-ad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La representación digital de una señal analógica se construye en las tres fases mostradas en la figura <a href="intro.html#fig:conversionad">1.3</a>. El proceso inicia obteniendo muestras de la magnitud a intervalos regulares (muestreo). A cada muestra obtenida se le asigna el más cercano de un conjunto finito de valores (cuantización). El valor seleccionado se codifica, utilizando típicamente una representación binaria (codificación).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:conversionad"></span>
+<img src="figuras/c1/conversionad-1.png" alt="*Proceso de conversión de una señal analógica a digital.*"  />
+<p class="caption">
+Figura 1.3: <em>Proceso de conversión de una señal analógica a digital.</em>
+</p>
+</div>
+<p>La cuantización implica una distorsión de la señal original (llamada error de cuantización) pues, en general, el valor discreto que representa la muestra no coincidirá exactamente con su magnitud en ese punto (ver figura <a href="intro.html#fig:mu-y-cuant">1.4</a>). En cambio, la señal digital es mucho más inmune a factores externos (las fuentes de ruido de la figura <a href="intro.html#fig:sistcom">1.1</a>) que alteran la magnitud de la señal.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mu-y-cuant"></span>
+<img src="figuras/c1/muestycuant-1.png" alt="*Muestreo y cuantización de una señal analógica.*"  />
+<p class="caption">
+Figura 1.4: <em>Muestreo y cuantización de una señal analógica.</em>
+</p>
+</div>
+<p>Finalmente, cada muestra cuantizada es representada por un valor binario (figura <a href="intro.html#fig:coddig">1.5</a>). El conjunto de valores utilizados para la representación digital debe elegirse con cuidado. Entre mayor sea el conjunto menor será la separación entre ellos, y por consiguiente, el error de cuantización será menor. Sin embargo, el patrón binario (es decir, el número de bits) para representar estos valores aumenta.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:coddig"></span>
+<img src="figuras/c1/codifica-1.png" alt="*Codificación de la señal cuantizada.*"  />
+<p class="caption">
+Figura 1.5: <em>Codificación de la señal cuantizada.</em>
+</p>
+</div>
+<p>Por simplicidad, en el ejemplo anterior se ha elegido un código de tres bits. Con tres bits, se tienen <span class="math inline">\(2^3=8~\)</span>niveles discretos. Cada magnitud muestreada se aproxima al nivel más cercano de ellos.</p>
+<blockquote>
+<p>El proceso de digitalización anterior, en el que cada muestra es convertida al valor discreto más cercano y codificada en una serie de pulsos binarios, también se le conoce como <strong>Modulación por Codificación de Pulsos</strong> (PCM, <em>Pulse Code Modulation</em>).</p>
+</blockquote>
+<div id="teorema-de-nyquist" class="section level4 unnumbered hasAnchor">
+<h4>Teorema de Nyquist<a href="intro.html#teorema-de-nyquist" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Para reconstruir la señal analógica se recurre a un proceso matemático de interpolación. En 1924, Henry Nyquist mostró, a través del teorema que lleva su nombre, que para obtener una reconstrucción completa, bastaba con tomar muestras al doble de la frecuencia máxima de la señal original<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. En consecuencia, es necesario conocer el rango de frecuencias de la señal (es decir, su <em>ancho de banda</em>, determinar la frecuencia más alta y muestrear al doble de este valor para que la señal digital retenga las propiedades de la original.</p>
+<blockquote>
+<dl>
+<dt>
+<strong><font color="blue">Caso de estudio.</font></strong>
+</dt>
+<dd>
+<p>Es ilustrativo ejemplificar los conceptos de conversión A/D en el marco de las redes telefónicas digitales.</p>
+<p>La voz está formada por señales que tienen componentes de frecuencia más allá de los 12,000 Hz. Sin embargo, los componentes principales de la voz, es decir, aquellos que permiten distinguir con claridad el mensaje emitido, se encuentran en el rango de 300 Hz a 3,400 Hz.</p>
+<p>En las redes telefónicas digitales se transforma la voz en una señal eléctrica que es sensada cada 125,ms, obteniendo 8,000 muestras por segundo, es decir, un poco más del doble requerido por el teorema a de Nyquist.</p>
+<p>Cada valor se representa con un número binario de 8 bits (se tienen <span class="math inline">\(2^8=256\,\)</span> niveles discretos), por lo que la señal digital tiene una tasa de <span class="math inline">\(64\,kb/s\)</span>.</p>
+Por supuesto, si se comprimen las señales digitalizadas, se requerirá de una tasa de transferencia menor.
+</dd>
+</dl>
+</blockquote>
+<p>Si se capturan menos de dos muestras por ciclo (es decir, si se muestra a menos del doble de la frecuencia máxima), entonces la señal que se generaría a partir de las muestras tomadas, no es la original, sino una en la que se han perdido algunas de sus propiedades. Por ejemplo, en la figura <a href="intro.html#fig:nyqalias">1.6</a>, los puntos azules se capturan a una tasa notablemente menor a <span class="math inline">\(2f_{max}\)</span>, lo que genera la señal representada por la línea azul punteada.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nyqalias"></span>
+<img src="figuras/c1/nyquistAlias-1.png" alt="*Efecto de muestreo a una tasa menor a la frecuencia de Nyquist.*"  />
+<p class="caption">
+Figura 1.6: <em>Efecto de muestreo a una tasa menor a la frecuencia de Nyquist.</em>
+</p>
+</div>
+<p>Si bien el proceso de digitalización introduce una cierta complejidad en el tratamiento de la señal original, la representación digital de la información tiene enormes ventajas para poder procesarla (por ejemplo, para comprimirla, transformarla, analizarla mediante programas de cómputo), almacenarla (por ejemplo, en un archivo) y transportarla en sistemas de comunicaciones digitales. Es por ello que en la actualidad, prácticamente todos los sistemas de comunicaciones están convergiendo hacia su digitalización.</p>
+<p>El teorema de Nyquist, además de indicar el número de muestras necesario para reconstruir una señal analógica a partir de la representación digital, fija el límite máximo de la cantidad de información que puede ser transmitida a través de un canal sin ruido.</p>
+<p>Si la digitalización se realiza al doble de la frecuencia máxima de la señal original (<span class="math inline">\(H\)</span>) y si se utilizan <span class="math inline">\(V\)</span> niveles discretos, entonces:
+<span class="math display">\[
+\text{Tasa máxima de datos} = 2H \log_2 (V)\,b/s
+\]</span></p>
+<p>Claude Shannon extiende en 1948 el trabajo original de Nyquist para canales con presencia de ruido <span class="citation"><a href="#ref-Tanenbaum:CN" role="doc-biblioref">[5]</a></span>. Si la cantidad de ruido en el canal se obtiene a partir la relación entre la potencia de la señal a trasmitir (<span class="math inline">\(S\)</span>) y la potencia del ruido presente (<span class="math inline">\(N\)</span>), entonces la tasa ideal de un canal con ancho de banda <span class="math inline">\(H\)</span> y radio señal a ruido (SNR, <em>signal to noise ratio</em>) <span class="math inline">\(S/N\)</span> es:
+<span class="math display">\[
+\text{Tasa máxima de datos} = H  \log_2 (1 + \frac{S}{N})\,b/s
+\]</span></p>
+<p>Este resultado es muy importante porque, además de ofrecer el límite teórico de la capacidad de un canal, indica que cualquier mensaje puede ser transmitido con confiabilidad, a pesar de tener un canal con ruido, diseñando una codificación que mejore la relación señal a ruido <span class="citation"><a href="#ref-Rheingold:TFT" role="doc-biblioref">[6]</a></span>.</p>
+</div>
 </div>
 </div>
 <div id="conmutación" class="section level2 hasAnchor" number="1.2">
@@ -374,11 +435,18 @@ Figura 1.2: <em>Señal senoidal.</em>
 <div id="ref-OECD:BS" class="csl-entry">
 <div class="csl-left-margin">[4] </div><div class="csl-right-inline">T. Directorate for Science, I. Industry, and C. Policy, <span>“"ECD broadband statistics".”</span> 2006.Available: <a href="&quot;http://www.oecd.org/document/9/0,2340,en_2649_34223_37529673_1_1_1_1,00.html&quot;">"http://www.oecd.org/document/9/0,2340,en_2649_34223_37529673_1_1_1_1,00.html"</a></div>
 </div>
+<div id="ref-Tanenbaum:CN" class="csl-entry">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">A. Tanenbaum, <em>Redes de computadoras, 4a ed.</em> Prentice Hall, 2003.</div>
+</div>
+<div id="ref-Rheingold:TFT" class="csl-entry">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">H. Rheingold, <em>Tools for thought: The history and future of mind-expanding technology</em>. The MIT Press, 2000.</div>
+</div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="1">
 <li id="fn1"><p>Si bien la suma puede ser infinita, en general basta con un número relativamente pequeño de componentes senoidales para representar con una precisión aceptable la señal<a href="intro.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Recordemos que una señal compleja puede representarse por una suma de señales senoidales<a href="intro.html#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

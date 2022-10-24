@@ -112,6 +112,70 @@ knitr::include_graphics("figuras/c1/senoidal-1.png")
 
 ### Conversión analógica a digital (A/D)
 
+La representación digital de una señal analógica se construye en las tres fases mostradas en la figura \@ref(fig:conversionad).  El proceso inicia obteniendo muestras de la magnitud a intervalos regulares (muestreo). A cada muestra obtenida se le asigna el más cercano de un conjunto finito de valores  (cuantización). El valor seleccionado se codifica, utilizando típicamente una representación binaria (codificación).
+  
+```{r, conversionad, echo=FALSE, fig.align='center', fig.cap='*Proceso de conversión de una señal analógica a digital.*'}
+knitr::include_graphics("figuras/c1/conversionad-1.png")
+```
+
+La cuantización implica una distorsión de la señal original (llamada error de cuantización) pues, en general, el valor discreto que representa la muestra no coincidirá exactamente con su magnitud en ese punto (ver figura \@ref(fig:mu-y-cuant)). En cambio, la señal digital es mucho más inmune a factores externos (las fuentes de ruido de la figura \@ref(fig:sistcom)) que alteran la magnitud de la señal.
+
+```{r, mu-y-cuant, echo=FALSE, fig.align='center', fig.cap='*Muestreo y cuantización de una señal analógica.*'}
+knitr::include_graphics("figuras/c1/muestycuant-1.png")
+```
+
+Finalmente, cada muestra cuantizada es representada por un valor binario (figura \@ref(fig:coddig)). El conjunto de valores utilizados para la representación digital debe elegirse con cuidado. Entre mayor sea el conjunto menor será la separación entre ellos, y por consiguiente, el error de cuantización será menor. Sin embargo, el patrón binario (es decir, el número de bits) para representar estos valores aumenta. 
+
+```{r, coddig, echo=FALSE, fig.align='center', fig.cap='*Codificación de la señal cuantizada.*'}
+knitr::include_graphics("figuras/c1/codifica-1.png")
+```
+
+Por simplicidad, en el ejemplo anterior se ha elegido un código de tres bits. Con tres bits, se tienen $2^3=8~$niveles discretos. Cada magnitud muestreada se aproxima al nivel más cercano de ellos.
+
+> El proceso de digitalización anterior, en el que cada muestra es convertida al valor discreto más cercano y codificada en una serie de pulsos binarios, también se le conoce como **Modulación por Codificación de Pulsos** (PCM, *Pulse Code Modulation*).
+
+#### Teorema de Nyquist {-}
+
+Para reconstruir la señal analógica se recurre a un proceso matemático de interpolación. En 1924, Henry Nyquist mostró, a través del teorema que lleva su nombre, que para obtener una reconstrucción completa, bastaba con tomar muestras al doble de la frecuencia máxima de la señal original^[Recordemos que una señal compleja puede representarse por una suma de señales senoidales]. En consecuencia, es necesario conocer el rango de frecuencias de la señal (es decir, su *ancho de banda*, determinar la frecuencia más alta y muestrear al doble de este valor para que la señal digital retenga las propiedades de la original.
+
+> <dl>
+<dt><strong><font color="blue">Caso de estudio.</font></strong></dt>
+<dd>
+Es ilustrativo ejemplificar los conceptos de conversión A/D en el marco de las redes telefónicas digitales. 
+>
+> La voz está formada por señales que tienen componentes de frecuencia más allá de los 12,000 Hz. Sin embargo, los componentes principales de la voz, es decir, aquellos que permiten distinguir con claridad el  mensaje emitido, se encuentran en el rango de 300 Hz a 3,400 Hz. 
+>
+> En las redes telefónicas digitales se  transforma la voz en una señal eléctrica que es sensada cada 125\,ms, obteniendo 8,000 muestras por segundo, es decir, un poco más del doble requerido por el teorema a de Nyquist. 
+>
+> Cada valor se representa con un número binario de 8 bits (se tienen $2^8=256\,$ niveles discretos), por lo que la señal digital tiene una tasa de $64\,kb/s$.
+>
+> Por supuesto, si se comprimen las señales digitalizadas, se requerirá de una tasa de transferencia menor.
+</dd>
+</dl>
+
+Si se capturan menos de dos muestras por ciclo (es decir, si se muestra a menos del doble de la frecuencia máxima), entonces la señal que se generaría a partir de las muestras tomadas, no es la original, sino una en la que se han perdido algunas de sus propiedades.  Por ejemplo, en la figura \@ref(fig:nyqalias), los puntos azules se capturan a una tasa notablemente menor a $2f_{max}$, lo que genera la señal representada por la línea azul punteada. 
+  
+```{r, nyqalias, echo=FALSE, fig.align='center', fig.cap='*Efecto de muestreo a una tasa menor a la frecuencia de Nyquist.*'}
+knitr::include_graphics("figuras/c1/nyquistAlias-1.png")
+```
+
+
+Si bien el proceso de digitalización introduce una cierta complejidad en el tratamiento de la señal original, la representación digital de la información tiene enormes ventajas para poder procesarla (por ejemplo, para comprimirla, transformarla, analizarla mediante programas de cómputo), almacenarla (por ejemplo, en un archivo) y transportarla en sistemas de comunicaciones digitales. Es por ello que en la actualidad, prácticamente todos los sistemas de comunicaciones están convergiendo hacia su digitalización.
+
+El teorema de Nyquist, además de indicar el número de muestras necesario para reconstruir una señal analógica a partir de la representación digital, fija el límite máximo de la cantidad de información que puede ser transmitida a través de un canal sin ruido. 
+
+Si la digitalización se realiza al doble de la frecuencia máxima de la señal original ($H$)  y si se utilizan $V$ niveles discretos, entonces:
+$$
+\text{Tasa máxima de datos} = 2H \log_2 (V)\,b/s
+$$
+
+Claude Shannon extiende en 1948 el trabajo original de Nyquist  para canales con presencia de ruido [@Tanenbaum:CN]. Si la cantidad de ruido en el canal se obtiene a partir la relación entre la potencia de la señal a trasmitir ($S$) y la potencia del ruido presente ($N$), entonces la tasa ideal de un canal con ancho de banda $H$ y radio señal a ruido (SNR, *signal to noise ratio*) $S/N$ es:
+$$
+\text{Tasa máxima de datos} = H  \log_2 (1 + \frac{S}{N})\,b/s
+$$
+
+Este resultado es muy importante porque, además de ofrecer el límite teórico de la capacidad de un canal, indica que cualquier mensaje puede ser transmitido con confiabilidad, a pesar de tener un canal con ruido, diseñando una codificación que mejore la relación señal a ruido [@Rheingold:TFT].
+
 ## Conmutación
 
 ### Conmutación de mensajes

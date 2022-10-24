@@ -7,6 +7,11 @@ h3:redes-de-telecomunicaciones Redes de telecomunicaciones
 h3:señal Señal
 fig:senoidal *Señal senoidal.*
 h3:conversión-analógica-a-digital-ad Conversión analógica a digital (A/D)
+fig:conversionad *Proceso de conversión de una señal analógica a digital.*
+fig:mu-y-cuant *Muestreo y cuantización de una señal analógica.*
+fig:coddig *Codificación de la señal cuantizada.*
+h4:teorema-de-nyquist Teorema de Nyquist
+fig:nyqalias *Efecto de muestreo a una tasa menor a la frecuencia de Nyquist.*
 h2:conmutación Conmutación
 h3:conmutación-de-mensajes Conmutación de mensajes
 h3:conmutación-de-circuitos Conmutación de circuitos
