@@ -2,8 +2,10 @@ h1:intro Introducción
 h2:resumen Resumen
 h2:requisitos Conceptos básicos
 h3:sistemas-de-comunicaciones Sistemas de comunicaciones
+fig:sistcom Sistema de comunicaciones básico
 h3:redes-de-telecomunicaciones Redes de telecomunicaciones
 h3:señal Señal
+fig:senoidal *Señal senoidal.*
 h3:conversión-analógica-a-digital-ad Conversión analógica a digital (A/D)
 h2:conmutación Conmutación
 h3:conmutación-de-mensajes Conmutación de mensajes

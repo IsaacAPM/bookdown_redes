@@ -58,11 +58,57 @@ Así, las redes de comunicaciones son vitales para las sociedades contemporánea
 
 ### Sistemas de comunicaciones
 
+Etimológicamente, la palabra telecomunicación está formada por el prefijo griego *tele* que significa "a distancia" y la raíz latina *comunicare*, "hacer común".  Así, las telecomunicaciones representan el acto de hacer común, de compartir *algo* entre dos o más entidades que se encuentran físicamente separadas.
 
+Para llevar esta definición a ejemplos concretos, ese *algo* es información (o conocimiento) que puede ser expresado a través de la voz (tele-fonía), de imágenes (tele-visión) o de símbolos (tele-grafía) y que requiere de un sistema que posibilite esta comunicación a la distancia.  
+
+En su forma más general, un sistema de comunicaciones está compuesto por los bloques que se ilustran en la 
+figura \@ref(fig:sistcom):
+  
+```{r, sistcom, echo=FALSE, fig.align='center', fig.cap='Sistema de comunicaciones básico'}
+knitr::include_graphics("figuras/c1/sistcom-1.png")
+```
+
+La fuente es la que genera la información y emite mensajes para uno o más destinatarios. La fuente de información puede generar señales analógicas o digitales (ver más adelante). La transferencia de información entre el emisor y el(los) receptor(es), se lleva a través de un canal de comunicación, como puede ser un cable de cobre, una fibra óptica o el espectro radioeléctrico.  Cuando las señales viajan a través del canal, necesariamente sufren perturbaciones impredecibles producidas por la naturaleza del canal o por elementos externos al sistema (por ejemplo, atenuaciones debido a la resistividad del medio, interferencia de otras fuentes, distorsión por las propiedades del medio) y que en conjunto se conocen como fuentes de ruido.
+
+En el sistema de comunicaciones, el transmisor consiste de un conjunto de elementos (como moduladores, codificadores, amplificadores) que permiten adecuar las señales generadas por las fuentes de información a las condiciones del canal de comunicación y de protegerlas, en la medida de lo posible, de las fuentes de ruido a las que serán sometidas.  Al otro extremo del canal, el receptor realiza un proceso inverso para recuperar la señal original y entregarla al destinatario.
 
 ### Redes de telecomunicaciones
 
+Los sistemas de comunicaciones han ido evolucionando y se han convertido hoy en sistemas complejos interconectados por distintos medios para proporcionar un conjunto de servicios. Estos sistemas son las redes de telecomunicaciones y, en términos generales, deben ser capaces de:
+
+- Proveer un camino entre usuarios y usuarios, y entre usuarios y servicios;
+- posibilitar a cada usuario para que pueda seleccionar a sus destinatarios;
+- proveer servicios con calidad, aún en periodos de gran actividad;
+- proporcionar mecanismos de control y gestión.
+
+La posibilidad de una red de procesar y transmitir información del tipo deseado por los usuarios, es el "servicio" proporcionado por dicha red. Los usuarios pueden ser finales (suscriptores) o intermedios (otras redes).  Algunos ejemplos de servicios, son los siguientes:
+
+- Telefónico local
+- Video transmisión
+- Tránsito
+- Acceso a internet 
+- Acceso a red de abonado
+
 ### Señal
+
+Un sistema analógico (o análogo) utiliza una cantidad física, como el voltaje, para representar el comportamiento de otro sistema físico. Las propiedades de esta representación son explotadas para almacenar, transformar, duplicar o amplificar el fenómeno original. Las señales utilizadas en un sistema analógico son continuas, por lo que pueden tomar un número potencialmente infinito de valores. 
+
+Hay muchos ejemplos de señales analógicas en la naturaleza, como el sonido, la temperatura ambiente o la intensidad de una fuente de luz (por supuesto, sin considerar los procesos que ocurren a nivel de la física cuántica).  De forma similar, la altura de una rampa varía de forma continua y su valor en un punto determinado solo puede ser establecida limitando la resolución del dispositivo utilizado para efectuar la medición. 
+
+Una desventaja de un sistema  analógico es la acumulación de pequeñas variaciones aleatorias cada vez que se realiza una operación sobre la señal adquirida. Por ejemplo, en el caso específico de un sistema eléctrico, siempre existen perturbaciones debidas al movimiento molecular (ruido  térmico). 
+
+Por su parte, una señal digital solo puede tomar valores discretos y cuantificables del fenómeno físico.  Por ejemplo, el número de árboles en un predio o el nivel de los peldaños en una escalera.  
+
+Una señal analógica puede ser convertida en una señal digital. A este proceso se le llama digitalización, lo cual, como se mostrará más adelante, ofrece una gran flexibilidad para manipular la señal.  Conviene recordar que la digitalización es uno de los detonadores de la primera ola en el desarrollo de las TIC.
+
+Por comodidad vamos a trabajar con señales senoidales simples como la que aparece en la figura.  Como lo demuestra el Teorema de Fourier, cualquier señal periodica puede aproximarse como una suma de funciones senoidales^[Si bien la suma puede ser infinita, en general basta con un número relativamente pequeño de componentes senoidales para representar con una precisión aceptable la señal]. 
+
+Una señal senoidal pura se muestra en la figura \@ref(fig:senoidal) representada como $s(t)$.  Las propiedades de la señal que pueden ser manipuladas para transportar información, son su amplitud ($A$), su frecuencia ($\omega$) y su fase ($\phi$).  La amplitud es la magnitud máxima que puede tomar la señal.  El tiempo que le toma a una señal desplegar una oscilación completa, se conoce como periodo y su inverso es la frecuencia $\omega$, que indica el número de oscilaciones por segundo que realiza $s(t)$.  La frecuencia se mide en Hertz.  La separación (medida en grados o radianes) de un punto de referencia arbitrario al inicio de un ciclo, es lo que se conoce como fase y se representa por $\phi$.
+  
+```{r, senoidal, echo=FALSE, fig.align='center', fig.cap='*Señal senoidal.*'}
+knitr::include_graphics("figuras/c1/senoidal-1.png")
+```
 
 ### Conversión analógica a digital (A/D)
 

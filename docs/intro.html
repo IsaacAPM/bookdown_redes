@@ -262,12 +262,52 @@ Va mucho más allá de los desarrollos tecnológicos (y del alcance de este curs
 <p>Así, las redes de comunicaciones son vitales para las sociedades contemporáneas, y es por ello que resulta conveniente entender con claridad los fundamentos técnicos en que se sustentan.</p>
 <div id="sistemas-de-comunicaciones" class="section level3 hasAnchor" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Sistemas de comunicaciones<a href="intro.html#sistemas-de-comunicaciones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Etimológicamente, la palabra telecomunicación está formada por el prefijo griego <em>tele</em> que significa “a distancia” y la raíz latina <em>comunicare</em>, “hacer común.” Así, las telecomunicaciones representan el acto de hacer común, de compartir <em>algo</em> entre dos o más entidades que se encuentran físicamente separadas.</p>
+<p>Para llevar esta definición a ejemplos concretos, ese <em>algo</em> es información (o conocimiento) que puede ser expresado a través de la voz (tele-fonía), de imágenes (tele-visión) o de símbolos (tele-grafía) y que requiere de un sistema que posibilite esta comunicación a la distancia.</p>
+<p>En su forma más general, un sistema de comunicaciones está compuesto por los bloques que se ilustran en la
+figura <a href="intro.html#fig:sistcom">1.1</a>:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sistcom"></span>
+<img src="figuras/c1/sistcom-1.png" alt="Sistema de comunicaciones básico"  />
+<p class="caption">
+Figura 1.1: Sistema de comunicaciones básico
+</p>
+</div>
+<p>La fuente es la que genera la información y emite mensajes para uno o más destinatarios. La fuente de información puede generar señales analógicas o digitales (ver más adelante). La transferencia de información entre el emisor y el(los) receptor(es), se lleva a través de un canal de comunicación, como puede ser un cable de cobre, una fibra óptica o el espectro radioeléctrico. Cuando las señales viajan a través del canal, necesariamente sufren perturbaciones impredecibles producidas por la naturaleza del canal o por elementos externos al sistema (por ejemplo, atenuaciones debido a la resistividad del medio, interferencia de otras fuentes, distorsión por las propiedades del medio) y que en conjunto se conocen como fuentes de ruido.</p>
+<p>En el sistema de comunicaciones, el transmisor consiste de un conjunto de elementos (como moduladores, codificadores, amplificadores) que permiten adecuar las señales generadas por las fuentes de información a las condiciones del canal de comunicación y de protegerlas, en la medida de lo posible, de las fuentes de ruido a las que serán sometidas. Al otro extremo del canal, el receptor realiza un proceso inverso para recuperar la señal original y entregarla al destinatario.</p>
 </div>
 <div id="redes-de-telecomunicaciones" class="section level3 hasAnchor" number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> Redes de telecomunicaciones<a href="intro.html#redes-de-telecomunicaciones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Los sistemas de comunicaciones han ido evolucionando y se han convertido hoy en sistemas complejos interconectados por distintos medios para proporcionar un conjunto de servicios. Estos sistemas son las redes de telecomunicaciones y, en términos generales, deben ser capaces de:</p>
+<ul>
+<li>Proveer un camino entre usuarios y usuarios, y entre usuarios y servicios;</li>
+<li>posibilitar a cada usuario para que pueda seleccionar a sus destinatarios;</li>
+<li>proveer servicios con calidad, aún en periodos de gran actividad;</li>
+<li>proporcionar mecanismos de control y gestión.</li>
+</ul>
+<p>La posibilidad de una red de procesar y transmitir información del tipo deseado por los usuarios, es el “servicio” proporcionado por dicha red. Los usuarios pueden ser finales (suscriptores) o intermedios (otras redes). Algunos ejemplos de servicios, son los siguientes:</p>
+<ul>
+<li>Telefónico local</li>
+<li>Video transmisión</li>
+<li>Tránsito</li>
+<li>Acceso a internet</li>
+<li>Acceso a red de abonado</li>
+</ul>
 </div>
 <div id="señal" class="section level3 hasAnchor" number="1.1.3">
 <h3><span class="header-section-number">1.1.3</span> Señal<a href="intro.html#señal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Un sistema analógico (o análogo) utiliza una cantidad física, como el voltaje, para representar el comportamiento de otro sistema físico. Las propiedades de esta representación son explotadas para almacenar, transformar, duplicar o amplificar el fenómeno original. Las señales utilizadas en un sistema analógico son continuas, por lo que pueden tomar un número potencialmente infinito de valores.</p>
+<p>Hay muchos ejemplos de señales analógicas en la naturaleza, como el sonido, la temperatura ambiente o la intensidad de una fuente de luz (por supuesto, sin considerar los procesos que ocurren a nivel de la física cuántica). De forma similar, la altura de una rampa varía de forma continua y su valor en un punto determinado solo puede ser establecida limitando la resolución del dispositivo utilizado para efectuar la medición.</p>
+<p>Una desventaja de un sistema analógico es la acumulación de pequeñas variaciones aleatorias cada vez que se realiza una operación sobre la señal adquirida. Por ejemplo, en el caso específico de un sistema eléctrico, siempre existen perturbaciones debidas al movimiento molecular (ruido térmico).</p>
+<p>Por su parte, una señal digital solo puede tomar valores discretos y cuantificables del fenómeno físico. Por ejemplo, el número de árboles en un predio o el nivel de los peldaños en una escalera.</p>
+<p>Una señal analógica puede ser convertida en una señal digital. A este proceso se le llama digitalización, lo cual, como se mostrará más adelante, ofrece una gran flexibilidad para manipular la señal. Conviene recordar que la digitalización es uno de los detonadores de la primera ola en el desarrollo de las TIC.</p>
+<p>Por comodidad vamos a trabajar con señales senoidales simples como la que aparece en la figura. Como lo demuestra el Teorema de Fourier, cualquier señal periodica puede aproximarse como una suma de funciones senoidales<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>Una señal senoidal pura se muestra en la figura <a href="intro.html#fig:senoidal">1.2</a> representada como <span class="math inline">\(s(t)\)</span>. Las propiedades de la señal que pueden ser manipuladas para transportar información, son su amplitud (<span class="math inline">\(A\)</span>), su frecuencia (<span class="math inline">\(\omega\)</span>) y su fase (<span class="math inline">\(\phi\)</span>). La amplitud es la magnitud máxima que puede tomar la señal. El tiempo que le toma a una señal desplegar una oscilación completa, se conoce como periodo y su inverso es la frecuencia <span class="math inline">\(\omega\)</span>, que indica el número de oscilaciones por segundo que realiza <span class="math inline">\(s(t)\)</span>. La frecuencia se mide en Hertz. La separación (medida en grados o radianes) de un punto de referencia arbitrario al inicio de un ciclo, es lo que se conoce como fase y se representa por <span class="math inline">\(\phi\)</span>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:senoidal"></span>
+<img src="figuras/c1/senoidal-1.png" alt="*Señal senoidal.*"  />
+<p class="caption">
+Figura 1.2: <em>Señal senoidal.</em>
+</p>
+</div>
 </div>
 <div id="conversión-analógica-a-digital-ad" class="section level3 hasAnchor" number="1.1.4">
 <h3><span class="header-section-number">1.1.4</span> Conversión analógica a digital (A/D)<a href="intro.html#conversión-analógica-a-digital-ad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -335,6 +375,12 @@ Va mucho más allá de los desarrollos tecnológicos (y del alcance de este curs
 <div class="csl-left-margin">[4] </div><div class="csl-right-inline">T. Directorate for Science, I. Industry, and C. Policy, <span>“"ECD broadband statistics".”</span> 2006.Available: <a href="&quot;http://www.oecd.org/document/9/0,2340,en_2649_34223_37529673_1_1_1_1,00.html&quot;">"http://www.oecd.org/document/9/0,2340,en_2649_34223_37529673_1_1_1_1,00.html"</a></div>
 </div>
 </div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Si bien la suma puede ser infinita, en general basta con un número relativamente pequeño de componentes senoidales para representar con una precisión aceptable la señal<a href="intro.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
@@ -395,6 +441,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
