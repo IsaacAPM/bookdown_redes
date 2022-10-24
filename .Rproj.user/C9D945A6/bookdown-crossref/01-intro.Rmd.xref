@@ -1,0 +1,23 @@
+h1:intro Introducción
+h2:resumen Resumen
+h2:requisitos Conceptos básicos
+h3:sistemas-de-comunicaciones Sistemas de comunicaciones
+h3:redes-de-telecomunicaciones Redes de telecomunicaciones
+h3:señal Señal
+h3:conversión-analógica-a-digital-ad Conversión analógica a digital (A/D)
+h2:conmutación Conmutación
+h3:conmutación-de-mensajes Conmutación de mensajes
+h3:conmutación-de-circuitos Conmutación de circuitos
+h3:conmutación-de-paquetes Conmutación de paquetes
+h2:multiplexaje Multiplexaje
+h3:multiplexaje-en-el-tiempo Multiplexaje en el tiempo
+h3:multiplexaje-en-frecuencia Multiplexaje en frecuencia
+h3:multiplexaje-por-división-de-código Multiplexaje por división de código
+h3:multiplexaje-espacial Multiplexaje espacial
+h2:arquitecturas-de-red Arquitecturas de red
+h3:modelo-isoosi Modelo ISO/OSI
+h3:modelo-tcpip Modelo TCP/IP
+h3:encapsulamiento Encapsulamiento
+h2:taxonomía Taxonomía
+h2:problemas Problemas
+

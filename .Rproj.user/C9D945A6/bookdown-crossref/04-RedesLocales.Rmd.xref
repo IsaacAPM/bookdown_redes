@@ -1,0 +1,22 @@
+h1:redes-locales Redes locales
+h2:introducción Introducción
+h2:redes-locales-1 Redes locales
+h2:ethernetieee-802.3 Ethernet/IEEE 802.3
+h3:csmacs CSMA/CS
+h3:formato-de-la-trama Formato de la trama
+h3:implementaciones Implementaciones
+h2:redes-locales-inalámbricas Redes locales inalámbricas
+h3:implementaciones-1 Implementaciones
+h2:conmutacion Conmutacion
+h3:principio-de-operación Principio de operación
+h3:conmutadores-transparentes---operación Conmutadores transparentes - operación
+h2:protocolo-spanning-tree Protocolo Spanning Tree
+h3:protocolo-spanning-tree-1 Protocolo Spanning Tree
+h2:rapid-stp Rapid STP
+h2:agregación-de-enlaces Agregación de enlaces
+h2:redes-locales-virtuales Redes locales virtuales
+h3:criterios-de-membresía Criterios de membresía
+h3:etiquetado-de-vlan Etiquetado de VLAN
+h3:puertos-de-acceso-y-de-truking Puertos de acceso y de truking
+h2:problemas Problemas
+

@@ -6,7 +6,7 @@ site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
 bibliography: [book.bib, packages.bib]
-biblio-style: apalike
+csl: ieee.csl
 link-citations: yes
 github-repo: IsaacAPM/bookdown_redes
 description: "Este libro contiene el material de apoyo para el curso de Redes de Computadoras que se imparte en el Instituto Tecnológico Autónomo de México"
@@ -19,15 +19,10 @@ Este documento contiene el material de apoyo para los cursos de Redes de Computa
 
 La estructuración del material sigue un modelo ascendente, de la capa física a la capa de aplicación, común en libros de texto clásicos de redes de computadoras.   
 
-El material ha sido integrado a lo largo de varios años de impartir estas materias en los niveles de licenciatura, maestría y diplomado.En él han participado varios profesores, entre los que cabe destacar: Dr. Uciel Fragoso, Dr. Federico Kuhlmann, Dr. José A. Incera, Dr. Marcelo Mejía y M.T. Ramón Ríos.
+El material ha sido integrado a lo largo de varios años de impartir estas materias en los niveles de licenciatura, maestría y diplomado. En él han participado varios profesores, entre los que cabe destacar: Dr. Uciel Fragoso, Dr. Federico Kuhlmann, Dr. José A. Incera, Dr. Marcelo Mejía y M.T. Ramón Ríos.
 
 Este mismo libro ha sido escrito en [R-Markdown](http://rmarkdown.rstudio.com) empleando el paquete [`bookdown`](https://bookdown.org/yihui/bookdown/)  y está disponible en el repositorio Github: [IsaacAPM/bookdown_redes](https://github.com/IsaacAPM/bookdown_redes). 
 
-```{r echo=FALSE, fig.align='left'}
-knitr::include_graphics("images/by-sa-88x31.png")
-```
-
-Esta obra está bajo una licencia de [Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional](https://creativecommons.org/licenses/by-sa/4.0/deed.es).
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

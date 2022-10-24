@@ -1,0 +1,15 @@
+# Capa física
+
+## Medios de transmisión
+
+### Introducción
+
+### Medios guiados
+
+## Sistemas de comunicaciones
+
+## Codificaciones
+
+## Interfaces
+
+## Problemas

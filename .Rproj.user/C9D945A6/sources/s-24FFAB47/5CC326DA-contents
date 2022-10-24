@@ -1,0 +1,1028 @@
+--- 
+title: "Redes de Computadoras"
+author: "José Alberto Incera Diéguez"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: IsaacAPM/bookdown_redes
+description: "Este libro contiene el material de apoyo para el curso de Redes de Computadoras que se imparte en el Instituto Tecnológico Autónomo de México"
+---
+
+
+# Prólogo {-}
+
+Este documento contiene el material de apoyo para los cursos de Redes de Computadoras que se imparten en el Instituto Tecnológico Autónomo de México.
+
+La estructuración del material sigue un modelo ascendente, de la capa física a la capa de aplicación, común en libros de texto clásicos de redes de computadoras.   
+
+El material ha sido integrado a lo largo de varios años de impartir estas materias en los niveles de licenciatura, maestría y diplomado. En él han participado varios profesores, entre los que cabe destacar: Dr. Uciel Fragoso, Dr. Federico Kuhlmann, Dr. José A. Incera, Dr. Marcelo Mejía y M.T. Ramón Ríos.
+
+<!--chapter:end:index.Rmd-->
+
+# Introducción {#intro}
+
+
+<!--chapter:end:01-intro.Rmd-->
+
+# Archivos de configuración
+
+Nos puede interesar modificar el encabezado de *index.Rmd* y 
+un par de archivos [YAML](https://en.wikipedia.org/wiki/YAML) de configuración
+(ver Sección \@ref(yaml) para más detalles sobre este formato). 
+
+## Encabezado de *index.Rmd* y archivo *\_output.yml*
+
+La cabecera YAML del primer archivo *.Rmd* del libro se puede utilizar para configurar
+distintas opciones:
+
+```yaml
+--- 
+title: "A Minimal Book Example"
+author: "Yihui Xie"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "This is a minimal example of using the bookdown package to write a book.
+The output format for this example is bookdown::gitbook."
+---
+```
+
+Obviamente cambiaremos el título, el nombre del autor y la descripción 
+(también nos podrá interesar cambiar las opciones de bibliografía, ver Sección \@ref(biblio), 
+o las del repositorio GitHub, ver Sección \@ref(github)). 
+Por ejemplo, se puede acceder al fichero *index.Rmd* de este libro
+[aquí](https://github.com/rubenfcasal/bookdown_intro/raw/master/index.Rmd) .
+
+Aunque se pueden especificar en esta cabecera otras opciones relacionadas con Pandoc,
+como por ejemplo opciones del formato de salida:
+```yaml
+---
+output:
+  bookdown::gitbook:
+    split_by: "section"       # Páginas por secciones (en lugar de capítulos)
+    split_bib: no             # No se muestra bibliografía al final de cada página
+    lib_dir: "book_assets"
+  bookdown::pdf_book:
+    keep_tex: yes
+---
+```
+Normalmente estableceremos las opciones del formato de salida en el 
+archivo de configuración YAML *\_output.yml*. 
+Por defecto se generá el libro en formato HTML (con las opciones de `bookdown::gitbook()`),
+en formato PDF a través de  LaTeX (`bookdown::pdf_book()`) y en formato EPUB (`bookdown::epub_book()`).
+En este archivo también nos interesará cambiar algunas de las opciones por defecto: 
+
+
+```yaml
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">A Minimal Book Example</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+    download: ["pdf", "epub"]
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default
+```
+
+Por lo menos en el formato HTML `bookdown::gitbook`, el título del documento en la parte superior de la tabla de contenido.
+El fichero [*\_output.yml*](https://github.com/rubenfcasal/bookdown_intro/blob/master/_output.yml) de este libro es:
+
+```yaml
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Escritura de libros con bookdown</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+    edit: https://github.com/rubenfcasal/bookdown_intro/edit/master/%s      # Si se publica con GitHub Pages...
+    download: "pdf"                                                         # Link de descarga en pdf
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+```
+
+Más detalles sobre las opciones de salida en el [libro de bookdown](https://bookdown.org/yihui/bookdown/output-formats.html).
+Otros ejemplos en castellano de 
+[*index.Rmd*](https://github.com/rubenfcasal/simbook/raw/master/index.Rmd) y 
+[*\_output.yml*](https://github.com/rubenfcasal/simbook/blob/master/_output.yml).
+
+## Archivo *\_bookdown.yml*
+
+El fichero de configuración por defecto es:
+```yaml
+book_filename: "bookdown-demo"
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true    
+```
+Por ejemplo, nos interesará cambiar el nombre del fichero y, 
+si se trata de un libro en castellano (galego, ...), el encabezado de los títulos de los capítulos.
+Además nos puede interesar cambiar los encabezados de algunos componentes como figuras y tablas,
+siguiendo las instrucciones de la [Sección 4.5](https://bookdown.org/yihui/bookdown/internationalization.html)
+del libro de bookdown. 
+Por ejemplo en este libro se emplea:
+```yaml
+book_filename: 'bookdown_intro'
+output_dir: docs
+new_session: no
+language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabla '
+    eq: 'Ecuación '
+    thm: 'Teorema '
+    lem: 'Lema '
+    def: 'Definición '
+    cor: 'Corolario '
+    prp: 'Proposición '
+    exm: 'Ejemplo '
+    exr: 'Ejercicio '
+    proof: 'Demostración. '
+    remark: 'Nota: '
+    solution: 'Solución. '
+  ui:
+    chapter_name: 'Capítulo '
+delete_merged_file: yes
+```
+y puede ser descargado [aquí](https://github.com/rubenfcasal/bookdown_intro/raw/master/_bookdown.yml).
+Además se modificó *preamble.tex* para configurar LaTeX para castellano, añadiendo:
+```latex
+\ifxetex
+  \usepackage{polyglossia}
+  \setmainlanguage{spanish}
+  % Tabla en lugar de cuadro
+  \gappto\captionsspanish{\renewcommand{\tablename}{Tabla}  
+          \renewcommand{\listtablename}{Índice de tablas}}
+\else
+  \usepackage[spanish,es-tabla]{babel}
+\fi
+```
+
+Otras opciones permitirían cambiar el orden de los ficheros *.Rmd* (`rmd_files:`) ,
+o establecer y configurar la sesión de R donde se evalúa el código. 
+Por ejemplo:
+```yaml
+new_session: yes                                    # Cada capítulo en una nueva sesión
+before_chapter_script: ["script1.R", "script2.R"]   # Ejecutar código antes de los capítulos
+after_chapter_script: "script3.R"                   # y después.
+```
+Más detalles de las opciones de configuración en el [libro de bookdown](https://bookdown.org/yihui/bookdown/configuration.html#configuration).
+
+<!--chapter:end:02-opciones.Rmd-->
+
+# Componentes
+
+## Introducción
+
+Para la elaboración de contenido se pueden emplear las componentes de RMarkdown
+descritas en el Apéndice \@ref(rmarkdown), incluyendo la sintaxis de Markdown (Sección \@ref(markdown))
+y la inclusión de bloques de código en R (Sección \@ref(codigormd)). 
+Pero como se comenta en este Apéndice, RMarkdown admite extensiones adicionales (proporcionadas por Pandoc),
+que pueden ser de utilidad en la escritura de un libro. 
+Por ejemplo, se pueden añadir sub~índices~ y super^índices^ con `sub~índices~` y `super^índices^`, notas al pie con `^[texto]`, ecuaciones y referencias bibliográficas.
+
+El paquete `bookdown` proporciona extensiones adicionales de la sistaxis de RMarkdown 
+especialmente diseñadas para la escritura de libros (ver p.e. la 
+[Sección 2.2](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html) 
+del libro de bookdown), además el comportamiento de algunos resultados 
+cambia al renderizar con este paquete. 
+
+El las siguientes secciones se mostrarán algunas de estas extensiones de RMarkdown y de `bookdown`
+(en el [Capítulo 2](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html) 
+del libro de bookdown se detallan todas las extensiones `bookdown`, incluyendo referencias de texto, 
+bloques personalizados, HTML widgets, páginas web y aplicaciones Shiny).
+
+## Secciones y cabeceras
+
+Como ya se comentó, en el fichero de RMarkdown `.Rmd` de cada capítulo, 
+este está definido por el título de primer nivel (e.g. `# Título`; 
+ver Sección \@ref(markdown) para la sintaxis de los distintos niveles de cabeceras), 
+por lo que sólo debería haber uno.
+Además, al renderizar con `bookdown` los capítulos y secciones se numeran automáticamente, siguiendo el orden alfabético de los ficheros. 
+
+Si no se desea numerar algún capítulo o sección, habrá que anádir `{-}` a continuación del correspondiente título (por ejemplo, en el archivo *index.Rmd* se incluyó `# Prólogo {-}`).
+
+Para referenciar un capítulo o sección, se puede añadir una etiqueta de la forma
+`{#etiqueta}` a continuación del correspondiente título, 
+después se podrá referenciar en el texto empleando `\@ref(etiqueta)`, 
+que al renderizar producirá un enlace con la correspondiente numeración 
+(más detalles en la [Sección 2.6](https://bookdown.org/yihui/bookdown/cross-references.html) del libro de bookdown).
+
+Adicionalmente hay dos tipos especiales de cabeceras de primer nivel que pueden ser empleadas en `bookdown`:
+
+-   `# (PARTE) Titulo de la Parte {-}`: para separar capítulos en partes.
+
+-   `# (APPENDIX) Apéndices {-}`: para crear apéndices. Los capítulos posteriores se tratarán como apéndices y se numerarán alfabeticamente (A, B, C, ...).,
+
+
+## Figuras y tablas
+
+En la Sección \@ref(opcodigo) se comentan algunas opciones de los bloques de código que pueden ser de utilidad para las figuras (algunas se pueden establecer en *\_output.yml*, ver Sección \@ref(yaml)).
+Por ejemplo, se puede establecer la opción `fig.cap` para incluir una leyenda 
+(sin incluir sintaxis Markdown, salvo que se utilicen referencias de texto). 
+En ese caso la gráfica se colocará en un entorno de figura (flotante en 
+PDF/LaTeX^[Se puede ajustar las posición empleando la opción de `fig.pos` 
+(por ejemplo, `fig.pos = '!htb'`).]), que se etiquetará y numerará automáticamente.
+
+Para referenciar una figura, habrá que añadir el prefijo `fig:` al nombre del bloque de código. Por ejemplo, la referencia a una figura en un bloque con nombre `foo` será `\@ref(fig:foo)`.
+
+Para incluir imágenes estáticas, en lugar de emplear la sintaxis habitual de markdown
+(e.g. `![](rmarkdown.png)`), se puede llamar a la función `knitr::include_graphics()`
+en un bloque de código para poder emplear las extensiones `bookdown`. Por ejemplo, la figura \@ref(fig:rmarkdown) se incluyó con el siguiente código:
+````markdown
+````r "{r rmarkdown, echo=FALSE, out.width='30%', fig.align='center', fig.cap='Logo de rmarkdown (desde archivo PNG).'}"`
+knitr::include_graphics("images/rmarkdown.png")
+```
+````
+
+```{r rmarkdown, echo=FALSE, out.width='30%', fig.align='center', fig.cap='Logo de rmarkdown (desde archivo PNG).'}
+knitr::include_graphics("images/rmarkdown.png")
+```
+Además puede ser recomendable guardar estas imágenes en un subdirectorio (*images* en el caso de este libro).
+En la [Sección 2.4](https://bookdown.org/yihui/bookdown/figures.html) del libro de bookdown se tienen más detalles sobre las Figuras.
+
+Las tablas se comportan de forma similar. Si se emplea la función `knitr::ktable()` 
+para incluir tablas, como se describe en la Sección \@ref(tablas), 
+estas se colocarán en un entorno de tabla (flotante en 
+PDF/LaTeX), y se etiquetarán y numerarán automáticamente.
+Para referenciarlas, habrá que añadir el prefijo `tab:` al nombre del bloque de código
+(e.g.  `\@ref(tab:foo)`).
+Más detalles en la [Sección 2.5](https://bookdown.org/yihui/bookdown/tables.html)
+del libro de bookdown.
+
+## Ecuaciones
+
+RMarkdown permite incluir expresiones matemáticas en formato LateX:
+
+*   En linea escribiendo la expresión latex entre dos símbolos de dolar, 
+    por ejemplo `$\alpha, \beta, \gamma, \delta$`
+    resultaría en $\alpha, \beta, \gamma, \delta$.
+  
+*   En formato ecuación empleando dos pares de símbolos de dolar. Por ejemplo:
+    ```
+    $$\Theta = \begin{pmatrix}\alpha & \beta\\
+    \gamma & \delta
+    \end{pmatrix}$$
+    ```
+    resultaría en:
+    $$\Theta = \begin{pmatrix}\alpha & \beta\\
+    \gamma & \delta
+    \end{pmatrix}$$
+    
+Adicionalmente en `bookdown` se pueden incluir ecuaciones numeradas (empleando directamente sintaxis LaTeX), que pueden ser referenciadas posteriormente. Por ejemplo: 
+```latex
+\begin{equation} 
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  (\#eq:ecuacion1)
+\end{equation}
+```
+produce la siguiente ecuación \@ref(eq:ecuacion1):
+\begin{equation}
+f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k} (\#eq:ecuacion1)
+\end{equation}    
+que puede ser referenciada con `\@ref(eq:ecuacion1)`
+(más detalles [aquí](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations)).
+  
+
+## Referencias bibliográficas {#biblio}
+
+RMarkdown también admite bibliografía en distintos formatos, ver p.e. <https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html>.
+Por defecto `bookdown` emplea referencias bibliográficas en formato BibTeX
+(lo que se describe con detalle [aquí](https://bookdown.org/yihui/bookdown/citations.html)).
+Para especificar uno o más archivos de bibliografía *.bib*, se usa el campo `bibliography` en el fichero *Index.Rmd*. Por defecto es de la forma:
+```yaml
+---
+bibliography: ["book.bib", "packages.bib"]
+biblio-style: "apalike"
+link-citations: true
+---
+```
+Por ejemplo, una entrada de BibTeX sería:
+
+```bibtex
+@book{xie2016bookdown,
+  title={Bookdown: Authoring Books and Technical Documents with R Markdown},
+  author={Xie, Yihui},
+  year={2016},
+  publisher={Chapman and Hall/CRC}
+}
+```
+Si se añade al fichero *book.bib* podemos referenciarla en el texto 
+empleando^[En RStudio se puede instalar el "[Addin](https://rstudio.github.io/rstudioaddins/)"
+[`citr`](https://github.com/crsh/citr) para insertar
+citas a referencias bibliográficas en formato BibTeX.] 
+`@xie2016bookdown` o `[@xie2016bookdown]`, resultando @xie2016bookdown o [@xie2016bookdown].
+
+Además, en el fichero *index.Rmd* se incluye por defecto el siguiente código:
+```
+# automatically create a bib database for R packages
+knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib')
+```
+que genera automáticamente el archivo *packages.bib* con las referencias bibliográficas de los
+paquetes especificados (puede interesar añadir los paquetes empleados).
+En el texto RMarkdown estas referencias se incluyen con `@R-paquete` (o `[@R-paquete]`), y
+la referencia a R [@R-base] con `[@R-base]`. 
+
+Pandoc generará el listado de referencias al final del documento, 
+por lo que habría que insertar una última sección `# Bibliografía {-}`
+al generar el libro en dormato HTML (en PDF se hará automáticamente al emplear LaTeX).
+Si además de HTML se empleán otros formatos, se puede añadir el código:
+```markdown
+`r inline2("if (knitr:::is_html_output()) '# Bibliografía {-}'")`
+```
+al final del documento.
+
+
+## Entornos
+
+El paquete `bookdown` proporciona entornos adicionales (numerados y no numerados) 
+que pueden ser de utilidad en la escritura de un libro. 
+En la Tabla  \@ref(tab:theorem-envs) se muestran los tipos de entorno soportados 
+(aunque el nombre mostrado puede variar si se cambió esta opción en el fichero *\_bookdown.yml*).
+
+(ref:theorem-envs) Entornos en `bookdown`.
+
+```{r theorem-envs, echo=FALSE}
+knitr::kable(data.frame(
+  Entorno = names(bookdown:::theorem_abbr),
+  `Nombre mostrado` = unname(unlist(bookdown:::label_names_math)),
+  `Prefijo referencia` = unname(bookdown:::theorem_abbr),
+  stringsAsFactors = FALSE, check.names = FALSE
+), caption = '(ref:theorem-envs)', booktabs = TRUE)
+```
+
+Para usar uno de estos entornos hay que emplear:
+````markdown
+````r '{example, label="foo", name="Entornos de bookdown"}'`
+Esto es un ejemplo.
+```
+````  
+obteniéndose el Ejemplo \@ref(exm:foo), que se puede referenciar con `\@ref(exm:foo)` 
+(más detalles en la 
+[Sección 2.2.2](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#theorems)
+del libro de bookdown).
+
+
+```{example, label="foo", name="Entornos de bookdown"}
+Esto es un ejemplo.
+```
+
+
+
+
+
+
+
+<!--chapter:end:03-extensiones.Rmd-->
+
+# Publicación
+
+
+La "publicación" del libro web puede ser tan simple como subirlo a
+[GitHub](https://help.github.com) (estableciendo antes las opciones 
+que se describen a continuación), aunque también bastaría con subir
+el contenido de la carpeta de salida *\_book* a cualquier servidor web.
+
+
+## GitHub Pages {#github}
+
+Para poder emplear [GitHub Pages](https://pages.github.com) 
+habría que cambiar el directorio de salida en el archivo *\_bookdown.yml*:
+```yaml
+output_dir: "docs"
+```
+Después de generar el libro, crear un fichero *.nojekyll* (vacio) 
+en el nuevo directorio *docs*
+(GitHub procesa los sitios web con Jekyll; 
+e.g. [enlace](https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages) ), 
+para lo que bastaría con ejecutar en la consola `file.create('docs/.nojekyll')`.
+Finalmente crear el correspondiente repositorio en GitHub, 
+estableciendo en la configuración de “GitHub Pages” 
+la opción de “Source” como “master branch /docs folder” 
+(p.e. siguiendo estos [pasos](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages)).
+
+Para ir añadiendo contenido a un sitio en GitHub, se puede emplear por ejemplo RStudio (e.g. [R packages](http://r-pkgs.had.co.nz/git.html) 
+by [Hadley Wickham](http://hadley.nz/#code))
+o instalar [GitHub Desktop](https://desktop.github.com)
+(lo que recomendaría en Windows...).
+
+Más información y alternativas en el [libro de bookdown](https://bookdown.org/yihui/bookdown/publishing.html).
+
+
+## Licencia
+
+Es recomendable incluir una licencia, por ejemplo, este libro está bajo una licencia de [Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional](https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+Sin embargo en el libro de 
+[Prácticas de Simulación](https://rubenfcasal.github.io/simbook) 
+se consideró una licencia
+[Creative Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_ES),
+de forma preliminar.
+
+Se puede incluir la licencia en formato texto en un archivo *LICENSE* en la raíz del proyecto.
+
+<!--chapter:end:04-publicacion.Rmd-->
+
+# (APPENDIX) Apéndices {-} 
+
+
+```{r setup, include=FALSE}
+# Este trozo de código se evalúa pero no se muestra. Aquí se utiliza para establecer
+# las opciones globales de renderizado, para cargar librerías y funciones.
+inline <- function(x = "") paste0("`` `r ", x, "` ``")
+inline2 <- function(x = "") paste0("`r ", x, "`")
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+R Markdown {#rmarkdown}
+==========
+
+Introducción
+------------
+
+Este documento se ha generado empleando Markdown y R. 
+RMarkdown es recomendable para difundir análisis realizados con R en formato 
+HTML, PDF y DOCX (Word), entre otros.
+
+Markdown se diseñó inicialmente para la creación de páginas web a partir de documentos de texto 
+de forma sencilla y rápida. 
+Es lo que se conoce como un lenguaje de marcado ligero, tiene unas reglas sintácticas muy simples
+y se busca principalmente la facilidad de lectura.
+Posteriormente se fueron añadiendo funcionalidades, 
+por ejemplo para incluir opciones de publicación en muchos otros formatos.
+La implementación original de Markdown es de 
+[John Gruber](http://daringfireball.net/projects/markdown/), 
+pero actualmente están disponibles múltiples dialectos 
+(sobre todo para publicar en gestores de contenido).
+RMarkdown utiliza las extensiones de la sintaxis proporcionada por *Pandoc* (ver Apendice \@ref(pandoc)),
+y adicionalmente permite la inclusión de código R.
+
+Al renderizar un fichero RMarkdown se generará un documento que incluye el código R 
+y los resultados incrustados en el documento^[Se llama al paquete `knitr` para "tejer" el código de R y
+los resultados en un fichero Markdown, que posteriormente es procesado con *pandoc*]. 
+En *RStudio* basta con hacer clic en el botón *Knit*. 
+En R se puede emplear la funcion `render` del paquete `rmarkdown` 
+(por ejemplo `render("Informe.Rmd")`).
+También se puede abrir directamente el informe generado:
+```
+library(rmarkdown)
+browseURL(url = render("Informe.Rmd"))
+```
+
+A continuación se darán algunos detalles sobre RMarkdown (y las extensiones Markdown de Pandoc 
+que admite: notas al pie de página, tablas, citas, ecuaciones LaTeX, ...).
+Para más información (incluyendo introducciones a Markdown y RMarkdown),
+se recomienda consultar alguna de las numerosas fuentes disponibles, 
+comenzando por la web oficial  <http://rmarkdown.rstudio.com/>.
+
+También se dispone de información en la ayuda de *RStudio*:
+
+-   *Help > Markdown Quick Reference*
+
+-   *Help > Cheatsheets > [R Markdown Cheat Sheet](https://www.rstudio.org/links/r_markdown_cheat_sheet)*
+
+-   *Help > Cheatsheets > [R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)*
+
+
+Otras fuentes permiten obtener documentación más detallada, como por ejemplo:
+
+- Web del paquete `knitr` [@R-knitr]: <https://yihui.name/knitr>.
+
+- @xie2018r : R Markdown: The Definitive Guide, 
+  <https://bookdown.org/yihui/rmarkdown/>.
+
+- Extensiones RMarkdown de Pandoc: <https://rmarkdown.rstudio.com/authoring_pandoc_markdown.html%23raw-tex>.
+
+
+## Sintaxis de Markdown {#markdown}
+
+Como ya se comentó la sintaxis de Markdown es muy secilla. 
+El texto no marcado se renderiza como texto normal aunque es necesario dejar una línea en blanco para 
+insertar un salto de línea. Las principales reglas de Markdown se sumarizan en la siguiente tabla:
+
++--------------------------+-----------------------------+--------------------------+
+| Escribir                 | o alternativamente          | para obtener ...         |
++==========================+=============================+==========================+
+| ```                      | ```                         |                          |
+| # Título 1               | Título 1                    | Los distintos            |
+|                          | ========                    | niveles de encabezados   |
+| ## Título 2              | Título 2                    |                          |
+|                          | --------                    |                          |
+| ### Título 3             | ### Título 3                |                          |
+| ```                      | ```                         |                          |
++--------------------------+-----------------------------+--------------------------+
+| ```                      | ```                         |                          |
+| *Cursiva*                | _Cursiva_                   | *Cursiva*                | 
+| ```                      | ```                         |                          |
++--------------------------+-----------------------------+--------------------------+
+| ```                      | ```                         |                          |
+| **Negrita**              | __Negrita__                 | **Negrita**              |
+| ```                      | ```                         |                          |
++--------------------------+-----------------------------+--------------------------+
+| ```                      | ```                         |                          |
+| [Enlace](http://url.gz)  | [Enlace][1]                 | [Enlace](http://rmark    |
+|                          | Más adelante...             | down.rstudio.com)        |
+|                          | [1]: http://url.gz          |                          |
+| ```                      | ```                         |                          |
++--------------------------+-----------------------------+--------------------------+
+| ```                      | ```                         |                          |
+| ![Imagen](rmarkdown.png) | ![Imagen][1]                | ![Imagen](images/rmd.png) |
+|                          | Más adelante...             |                          |
+|                          | [1]:http://url/b.jpg        |                          |
+| ```                      | ```                         |                          |
++--------------------------+-----------------------------+--------------------------+
+| ```                      |                             |                          |
+| > Blockquote             |                             | > Blockquote             |
+| >                        |                             | >                        |
+| > --- El Autor           |                             | > --- El Autor           |
+| ```                      |                             |                          |
++--------------------------+-----------------------------+--------------------------+
+| ```                      | ```                         |                          |
+| * Lista                  | -  Lista                    | -   Lista                |
+| * Lista                  | -  Lista                    | -   Lista                |
+|    + Sub-lista           |    - Sub-lista              |     -   Sub-lista        |
+| ```                      | ```                         |                          |
++--------------------------+-----------------------------+--------------------------+
+| ```                      | ```                         |                          |
+| 1. Uno                   | 1) Uno                      | 1.  Uno                  |
+| 2. Dos                   | 2) Dos                      | 2.  Dos                  |
+|    a. A                  |    a) A                     |     a. A                 |
+| ```                      | ```                         |                          |
++--------------------------+-----------------------------+--------------------------+
+| ```                      | ```                         |                          |
+| Regla horizontal         | Regla horizontal            | Regla horizontal         |
+|                          |                             |                          |
+| ---                      | ***                         | ---                      |
+| ```                      | ```                         |                          |
++--------------------------+-----------------------------+--------------------------+
+| ```                      |                             |                          |
+| `código en línea` entre  |                             | `código en línea` entre  |
+| comillas invertidas      |                             | comillas invertidas      |
+| ```                      |                             |                          |
++--------------------------+-----------------------------+--------------------------+
+| ````                     | ```                         |                          |
+| ```                      | [····]# bloque de código    | ```                      |
+| # bloque de código       | [····]3 comillas invertidas | # bloque de código       |
+| 3 comillas invertidas    | [····]o sangría de 4 espaci | 3 comillas invertidas    |
+| o sangría de 4 espacios  | os                          | o sangría de 4 espacios  |
+| ```                      | ```                         | ```                      |
+| ````                     |                             |                          |
++--------------------------+-----------------------------+--------------------------+
+
+Es muy recomendable dejar siempre una linea de separación entre elementos distintos consecutivos.
+
+
+
+## Inclusión de código R {#codigormd}
+
+Se puede incluir código R entre los delimitadores ` ```{r} ` y ` ``` `. 
+Por defecto, se mostrará el código, se evaluará y se mostrarán los resultados justo a continuación.
+Por ejemplo el siguiente código:
+````markdown
+````r '{r}'`
+head(mtcars[1:3])
+summary(mtcars[1:3])
+```
+````
+produce:
+```{r}
+head(mtcars[1:3])
+summary(mtcars[1:3])
+```
+
+En *RStudio* pulsando "Ctrl + Alt + I" o en el icono correspondiente se incluye un trozo de código.
+
+También se puede incluir código en línea empleando `r inline("código")`, 
+por ejemplo `r inline("2 + 2")` produce `r 2 + 2`.
+
+
+### Gráficos
+
+Si el código genera un gráfico, este se incluirá en el documento justo después de donde fué generado 
+(por defecto). Por ejemplo el siguiente gráfico:
+
+```{r figura1, echo=FALSE}
+hist(mtcars$mpg)
+```
+
+se generó empleando:
+````markdown
+````r '{r figura1, echo=FALSE}'`
+hist(mtcars$mpg)
+```
+````
+
+aunque no se mostró previamente el código al haber establecido la opción ` ```{r, echo=FALSE} `.
+
+### Opciones de bloques de código {#opcodigo}
+
+Los trozos de código pueden tener nombre y opciones, se establecen en la cabecera de la forma 
+` ```{r nombre, op1, op2} `. 
+Para un listado de las opciones disponibles ver <http://yihui.name/knitr/options>
+(en la [Sección 2.6](https://bookdown.org/yihui/rmarkdown/r-code.html) del libro de RMarkdown
+se incluye un resumen).
+En *RStudio* se puede pulsar en los iconos en la parte superior derecha del bloque de código 
+para establecer opciones, ejecutar todo el código anterior o sólo el correspondiente trozo.
+
+Algunas opciones sobre evaluación y resultados:
+
+* `eval`: si `=FALSE` no se evalúa el código.
+* `echo`: si `=FALSE` no se muestra el código.
+* `include`: si `=FALSE` no se muestra el código ni ningún resultado.
+* `message, warning, error`: oculta el correspondiente tipo de mensaje de R 
+  (los errores o warnings se mostrarán en la consola).
+* `cache`: si se activa, guarda los resultados de la última evaluación 
+  y se reutilizan si no cambió el bloque de código 
+  (más detalles [aquí](https://yihui.name/knitr/options/#cache)).
+  Puede ser de utilidad durante la redacción del documento para reducir el tiempo de renderizado
+  (usándolo con cuidado y desactivándolo al terminar). 
+
+Algunas opciones sobre resultados gráficos:
+
+* `fig.width, fig.height, fig.dim`: dimensiones del dispositivo gráfico de R 
+  (no confundir con el tamaño del resultado), e.g. `fig.width = 5`.
+* `out.width, out.heigh`: tamaño del gráfico, e.g. `='80%'`.
+* `fig.align`: `='left', 'center', 'right'`, establece la alineación.
+* `fig.cap`: leyenda de la figura^[Si se genera un documento en PDF/LaTeX el gráfico 
+  se mostrará en un entorno flotante y se puede ajustar la posición empleando la opción 
+  `fig.pos` (por ejemplo, `fig.pos = '!htb'`).].
+* `dev`: dispositivo gráfico de R, por defecto `='pdf'` para LaTeX y `'png'` para HTML.
+  Otras opciones son `'svg'` o `'jpeg'`.
+
+Para establecer valores por defecto para todos los bloques de código 
+se suele incluir uno de configuración al principio del documento, por ejemplo:
+
+````markdown
+````r '{r, setup, include=FALSE}'`
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, dev='svg', fig.dim=c(5, 7), collapse=TRUE)
+```
+````
+
+## Tablas {#tablas}
+
+Las tablas en Markdown son de la forma:
+```
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Row1 Cell1    | Row1 Cell2    |
+| Row2 Cell1    | Row2 Cell2    |
+```
+Por ejemplo:
+
+Variable  | Descripción
+--------  | -----------------------------------------------------------
+mpg	  |  Millas / galón (EE.UU.) 
+cyl	  |  Número de cilindros
+disp  |	 Desplazamiento (pulgadas cúbicas)
+hp	  |  Caballos de fuerza bruta
+drat  |  Relación del eje trasero
+wt    |  Peso (miles de libras)
+qsec  |  Tiempo de 1/4 de milla
+vs    |  Cilindros en V/Straight (0 = cilindros en V, 1 = cilindros en línea)
+am    |  Tipo de transmisión (0 = automático, 1 = manual)
+gear  |  Número de marchas (hacia adelante)
+carb  |  Número de carburadores
+
+
+Para convertir resultados de R en tablas de una forma simple se puede emplear la función `kable()` del paquete *knitr*. Por ejemplo la Tabla \@ref(tab:kable) se obtuvo mediante el siguiente código:
+```{r kable}
+knitr::kable(
+  head(mtcars), 
+  caption = "Una kable knitr"
+)
+```
+
+Otros paquetes proporcionan opciones adicionales: *xtable*, *stargazer*, *pander*, *tables* y *ascii*.
+
+## Cabecera YAML {#yaml}
+En un fichero RMarkdown se puede incluir metadatos en una cabecera en formato YAML 
+(YAML Ain’t Markup Language, https://en.wikipedia.org/wiki/YAML), 
+comenzando y terminando con tres guiones `---`. 
+Los metadatos de YAML son típicamente opciones de renderizado consitentes en 
+pares de etiquetas y valores separados por dos puntos. 
+Por ejemplo:
+
+```yaml
+---
+title: "Creación de contenidos con RMarkdown"
+author: "Fernández-Casal, R. y Cotos-Yáñez, T.R."
+date: "`r inline2("Sys.Date()")`"
+output: html_document
+---
+```
+Aunque no siempre es necesario, se recomienda que los valores de texto se introduzcan entre comillas (se puede incluir código R en línea, como por ejemplo `r inline("Sys.Date()")` para obtener la fecha actual). Para valores lógicos se puede emplear `yes/true` y `no/false` para verdadero y falso, respectivamente.
+
+Los valores pueden ser vectores, por ejemplo las siguientes opciones son equivalentes:
+```yaml
+bibliography: [book.bib, packages.bib]
+```
+```yaml
+bibliography:
+- book.bib
+- packages.bib
+```
+También pueden ser listas, añadiendo una sangría de dos espacios (importante):
+```yaml
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+```
+El campo `output` permite especificar el formato y las opciones de salida (por defecto se empleará la primera). Empleando este campo también se pueden especificar opciones gráficas para los bloques de código, por ejemplo:
+```yaml
+output:
+  html_document:
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+```
+
+La mayoría de los campos YAML son opciones que el paquete `rmarkdown` le pasa a Pandoc
+(ver documentación en el Apéndice \@ref(pandoc)).
+
+Un ejemplo adicional^[Puede ser interesante ejecutar `str(rmarkdown::html_document())` 
+para ver un listado de todas las opciones disponibles de `html_document`]:
+
+```yaml
+---
+title: "Creación de contenidos con RMarkdown"
+subtitle: "Curso de introducción a R"
+author:
+- name: "Rubén Fernández Casal (ruben.fcasal@udc.es)"
+  affiliation: "Universidade da Coruña"
+- name: "Tomás R. Cotos Yáñez (tcotos@uvigo.es)"
+  affiliation: "Universidade de Vigo"
+date: "`r Sys.Date()`"
+logo: rmarkdown.png
+output:
+  html_document:
+    toc: yes                  # incluir tabla de contenido
+    toc_float: yes            # toc flotante a la izquierda
+    number_sections: yes      # numerar secciones y subsecciones
+    code_folding: hide        # por defecto el código aparecerá oculto
+    mathjax: local            # emplea una copia local de MathJax, hay que establecer:
+    self_contained: false     # las dependencias se guardan en ficheros externos
+    lib_dir: libs             # directorio para librerías (Bootstrap, MathJax, ...)
+  pdf_document:
+    toc: yes
+    toc_depth: 2
+    keep_tex: yes             # conservar fichero latex
+    
+---
+```
+Como se puede deducir del ejemplo anterior, en el formato YAML podemos incluir comentarios con el carácter `#` 
+(por ejemplo para no emplear alguna de las opciones sin borrarla del encabezado).
+
+En el [Capítulo 3](https://bookdown.org/yihui/rmarkdown/documents.html) del libro de RMarkdown
+se tiene información detallada sobre las opciones de los distintos formatos de salida 
+(sobre ficheros HTML [aquí](https://bookdown.org/yihui/rmarkdown/html-document.html) 
+y sobre PDF/LaTeX [aquí](https://bookdown.org/yihui/rmarkdown/pdf-document.html)).
+
+
+## Extracción del código R
+
+Para generar un fichero con el código R se puede emplear la función `purl` del paquete *knitr*. Por ejemplo:
+```
+purl("Informe.Rmd")
+```
+Si se quiere además el texto RMarkdown como comentarios tipo `spin`, se puede emplear:
+```
+purl("Informe.Rmd", documentation = 2)
+```
+
+## Spin
+
+Una forma rápida de crear este tipo de informes a partir de un fichero de código R es emplear la funcion 
+`spin` del paquete *knitr* (ver p.e. <http://yihui.name/knitr/demo/stitch>).
+
+Para ello se debe comentar todo lo que no sea código R de una forma especial:
+
+-   El texto RMarkdown se comenta con `#' `. Por ejemplo:
+    ```
+    #' # Este es un título de primer nivel
+    #' ## Este es un título de segundo nivel
+    ```
+-   Las opciones de un trozo de código se comentan con `#+`. Por ejemplo:
+    ```
+    #+ setup, include=FALSE
+    opts_chunk$set(comment=NA, prompt=TRUE, dev='svg', fig.height=6, fig.width=6)
+    ```
+
+Para generar el informe se puede emplear la funcion `spin` del paquete *knitr*. Por ejemplo: `spin("Ridge_Lasso.R")`.
+También se podría abrir directamente el informe generado:
+```
+browseURL(url = knitr::spin("Ridge_Lasso.R"))
+```
+Pero puede ser recomendable renderizarlo con rmarkdown:
+```
+library(rmarkdown)
+browseURL(url = render(knitr::spin("Ridge_Lasso.R", knit = FALSE)))
+```
+En *RStudio* basta con pulsar "Ctrl + Shift + K" o seleccionar *File > Knit Document* (en las últimas versiones también *File > Compile Notebook* o hacer clic en el icono correspondiente).
+
+Por ejemplo, si se quiere convertir la salidas de un fichero de código de R a formato LaTeX 
+(para añadirlas fácilmente a un documento en este formato), bastaría con incluir una cabecera de
+la forma:
+```markdown
+#' ---
+#' title: "Título"
+#' author: "Autor"
+#' date: "Fecha"
+#' output:
+#'   pdf_document:
+#'      keep_tex: true
+#' ---
+```
+
+
+## Extensiones RMarkdown de pandoc
+
+Como ya se comentó, RMarkdown utiliza la sintaxis extendida proporcionada por Pandoc. 
+Por ejemplo, se pueden añadir sub~índices~ y super^índices^ con `sub~índices~` y `super^índices^`,  
+y notas al pie con `^[texto]`.
+
+Podemos incluir expresiones matemáticas en formato LateX:
+
+*   En linea escribiendo la expresión latex entre dos símbolos de dolar, 
+    por ejemplo ``$\alpha, \beta, \gamma, \delta$ ``
+    resultaría en $\alpha, \beta, \gamma, \delta$.
+  
+*   En formato ecuación empleando dos pares de símbolos de dolar. Por ejemplo:
+    ```
+    $$\Theta = \begin{pmatrix}\alpha & \beta\\
+    \gamma & \delta
+    \end{pmatrix}$$
+    ```
+    resultaría en:
+    $$\Theta = \begin{pmatrix}\alpha & \beta\\
+    \gamma & \delta
+    \end{pmatrix}$$
+
+También admite bibliografía, ver p.e. <https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html>.
+Lo más cómodo puede ser emplear un archivo de bibliografía en formato BibTeX,
+lo que se describe con detalle [aquí](https://bookdown.org/yihui/bookdown/citations.html).
+Será necesario añadir un campo `bibliography` en la cabezera YAML, por ejemplo:
+```yaml
+bibliography: bibliografia.bib
+csl: apa.csl  # opcional
+```
+Suponiendo que en el directorio de trabajo están los ficheros de bibliografía *bibliografia.bib* 
+y de estilo *apa.csl* (ver  <http://citationstyles.org/>, desde donde se pueden descargar 
+distintos archivos de estilo). 
+
+Las referencias en el texto RMarkdown se incluyen con `@referencia` o `[@referencia]`. 
+Pandoc generará el listado de referencias al final del documento, 
+por lo que nos puede interesar insertar una última sección `# Bibliografía {-}`
+al generar documentos HTML (en PDF se hará automáticamente al emplear LaTeX).
+En RStudio se puede instalar el "[Addin](https://rstudio.github.io/rstudioaddins/)"
+[`citr`](https://github.com/crsh/citr) para insertar
+citas a referencias bibliográficas en formato BibTeX.
+
+Para más detalles de las extensiones de Pandoc ver por ejemplo 
+<https://rmarkdown.rstudio.com/authoring_pandoc_markdown.html%23raw-tex>
+o el manual de Pandoc <https://pandoc.org/MANUAL.html>.
+
+
+
+
+
+
+
+<!--chapter:end:10-rmarkdown.Rmd-->
+
+Pandoc {#pandoc}
+======
+
+## Introducción
+
+Pandoc es un conversor de documentos libre y de código abierto, 
+Pandoc puede leer archivos en distintos formatos, incluyendo:
+
+- Distintos dialectos de [Markdown](http://daringfireball.net/projects/markdown/)
+
+- [HTML](http://www.w3.org/TR/html40/)
+
+- [LaTeX](http://www.latex-project.org/)
+
+- Microsoft Word [docx](https://en.wikipedia.org/wiki/Office_Open_XML)
+
+- LibreOffice [ODT](http://en.wikipedia.org/wiki/OpenDocument)
+
+- [EPUB](http://en.wikipedia.org/wiki/EPUB)
+
+Puede convertir los documentos de entrada a muchos otros formatos, incluyendo Office Open XML, OpenDocument, HTML, Wiki markup, InDesign ICML, ebooks, OPML, y varios formatos basados en TeX (desde donde se puede producir un PDF).
+En la web oficial <https://pandoc.org> hay un listado completo de los formatos soportados. 
+Pandoc también proporciona distintas extensiones de Markdown para que admita resultados más complejos.
+
+Pandoc es una herramienta independiente de línea de comandos (sin interfaz gráfica), que se instala automáticamente con RStudio porque el paquete `rmarkdown` la emplea para generar los documentos de salida a partir de documentos Markdown
+(por ejemplo, en Windows en *C:\\Program Files\\RStudio\\bin\\pandoc\\pandoc.exe*).
+
+## Conversión de documentos con Pandoc {#conversion}
+
+La sintaxis del comando es `pandoc [opciones] [ficheros]`. Si se ejecuta `pandoc --help`, 
+en la ventana de comandos o en la pestaña *Terminal* de RStudio, se obtiene un listado detallado de las opciones. 
+También se puede consultar el manual de Pandoc <https://pandoc.org/MANUAL.html>.
+
+Si Pandoc no está configurado en la ruta de búsqueda, habrá que reemplazar `pandoc` por la ruta completa al ejecutable.
+Por ejemplo, para emplear la versión instalada con RStudio en Windows habra que introducir `"C:\Program Files\RStudio\bin\pandoc\pandoc"`.
+
+Podemos emplear Pandoc para convertir contenido escrito en otros formatos a Markdown, por ejemplo:
+
+*   Un fichero word a markdown
+    ```
+    "C:\Program Files\RStudio\bin\pandoc\pandoc" fichero.docx -f docx -t markdown 
+    --extract-media . -o fichero.Rmd 
+    ```
+
+*   Un fichero LaTeX a markdown
+    ```
+    "C:\Program Files\RStudio\bin\pandoc\pandoc" fichero.tex -f latex -t markdown 
+    -o fichero.Rmd 
+    ```
+
+*   Una web a markdown
+    ```
+    "C:\Program Files\RStudio\bin\pandoc\pandoc" http://url.org -f html -t markdown 
+    -o fichero.Rmd
+    ```
+    
+Por defecto *pandoc* produce en algunos casos un fragmento de documento 
+(cuando el formato de salida no es markdown). 
+Para obtener un documento independiente (e.g. un fichero HTML válido incluyendo `<head>` y `<body>`), 
+habrá que emplear la opción `-s` o `--standalone`.
+  
+## Pandoc y RMarkdown
+
+Como ya se comentó, el paquete `rmarkdown` llama a *pandoc* para renderizar un documento 
+RMarkdown^[Desde la [versión 2](https://blog.rstudio.org/2014/06/18/r-markdown-v2/), 
+antes se utilizaba `knitr` y `markdown`.], y esta llamada se muestra en la consola 
+(o en la correspondiente pestaña de RStudio):
+
+```
+"C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS Informes.utf8.md --to html4 
+--from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash 
+--output Informes.html --smart --email-obfuscation none --self-contained --standalone 
+--section-divs --table-of-contents --toc-depth 3 --variable toc_float=1 
+--variable toc_selectors=h1,h2,h3 --variable toc_collapsed=1 --variable toc_smooth_scroll=1 
+--variable toc_print=1 --template "C:\PROGRA~1\R\R-35~1.1\library\RMARKD~1\rmd\h\DEFAUL~1.HTM"
+--no-highlight --variable highlightjs=1 --variable "theme:bootstrap" --include-in-header
+"C:\Users\RUBEN~1.FCA\AppData\Local\Temp\RtmpkntXD8\rmarkdown-str2084caf51da.html" --mathjax 
+--variable "mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+
+Output created: Informes.html
+```
+La mayoría de los campos de la cabecera YAML de un fichero RMarkdown se traducen en las opciones de Pandoc.
+Por ejemplo, la cabezera:
+```yaml
+---
+output:
+  html_document:
+    number_sections: yes      
+---
+```
+(que produce la numeración de secciones y subsecciones), 
+se corresponde con la opción `--number-sections` de *pandoc*.
+También se puede establecer cualquier opción de Pandoc en la cabecera YAML 
+mediante el campo `pandoc_args`, por ejemplo:
+```yaml
+---
+output:
+  html_document: 
+    pandoc_args: ["--number-offset", "4,0", "--number-sections"]      
+---
+```
+(en este caso la numeración comenzaría en 4).
+
+<!--chapter:end:11-pandoc.Rmd-->
+
+`r if (knitr:::is_html_output()) '
+# Bibliografía {-}
+'`
+
+<!--chapter:end:20-references.Rmd-->
+

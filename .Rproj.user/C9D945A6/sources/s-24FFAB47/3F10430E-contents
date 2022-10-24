@@ -1,0 +1,17 @@
+# Capa de enlace de datos
+
+## Introducción
+
+## Control de errores
+
+### Detección de errores
+
+### Auto-corrección de errores
+
+## Protocolos para corrección de errores
+
+### Protocolo Stop and Wait
+
+### Protocolos de ventanas deslizantes
+
+## Ejemplos de protocolos de enlace de datos

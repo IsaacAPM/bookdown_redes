@@ -1,0 +1,10 @@
+h1:capa-de-enlace-de-datos Capa de enlace de datos
+h2:introducción Introducción
+h2:control-de-errores Control de errores
+h3:detección-de-errores Detección de errores
+h3:auto-corrección-de-errores Auto-corrección de errores
+h2:protocolos-para-corrección-de-errores Protocolos para corrección de errores
+h3:protocolo-stop-and-wait Protocolo Stop and Wait
+h3:protocolos-de-ventanas-deslizantes Protocolos de ventanas deslizantes
+h2:ejemplos-de-protocolos-de-enlace-de-datos Ejemplos de protocolos de enlace de datos
+

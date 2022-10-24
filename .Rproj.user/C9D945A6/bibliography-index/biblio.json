@@ -1,76 +1,268 @@
 {
     "sources": [
         {
-            "URL": "http://yihui.name/knitr/",
             "author": [
                 {
-                    "family": "Xie",
-                    "given": "Yihui"
+                    "family": "Stallings",
+                    "given": "W."
                 }
             ],
-            "edition": "2nd",
-            "id": "xie2015",
+            "id": "Stallings:DCC",
             "issued": {
                 "date-parts": [
                     [
-                        2015
+                        2007
                     ]
                 ]
             },
-            "note": "ISBN 978-1498716963",
-            "publisher": "Chapman; Hall/CRC",
-            "publisher-place": "Boca Raton, Florida",
-            "title": "Dynamic Documents with R and knitr",
-            "type": "book"
-        },
-        {
-            "URL": "https://bookdown.org/yihui/rmarkdown/",
-            "author": [
-                {
-                    "family": "Xie",
-                    "given": "Yihui"
-                },
-                {
-                    "family": "Allaire",
-                    "given": "JJ"
-                },
-                {
-                    "family": "Grolemund",
-                    "given": "Garrett"
-                }
-            ],
-            "id": "xie2018r",
-            "issued": {
-                "date-parts": [
-                    [
-                        2018
-                    ]
-                ]
-            },
-            "publisher": "CRC Press",
-            "title": "R Markdown: The Definitive Guide",
-            "title-short": "R Markdown",
+            "publisher": "Prentice Hall",
+            "title": "Data and Computer Communications",
             "type": "book"
         },
         {
             "author": [
                 {
-                    "family": "Xie",
-                    "given": "Yihui"
+                    "family": "Castells",
+                    "given": "M."
                 }
             ],
-            "id": "xie2016bookdown",
+            "collection-title": "Economy, Society y Culture, volumen I",
+            "id": "Castells:RNS",
             "issued": {
                 "date-parts": [
                     [
-                        2016
+                        2000
                     ]
                 ]
             },
-            "publisher": "Chapman; Hall/CRC",
-            "title": "Bookdown: Authoring Books and Technical Documents with R Markdown",
-            "title-short": "Bookdown",
+            "publisher": "Blackwell",
+            "title": "The Rise of the Network Society. The Information Age",
             "type": "book"
+        },
+        {
+            "URL": "\"http://www.ictregulationtoolkit.org/en/home\"",
+            "author": [
+                {
+                    "family": "ITU"
+                },
+                {
+                    "family": "Bank",
+                    "given": "InofDev/World"
+                }
+            ],
+            "id": "ICT:RT",
+            "title": "“The ICT Regulation Toolkit”",
+            "type": ""
+        },
+        {
+            "URL": "\"http://www.oecd.org/document/9/0,2340,en_2649_34223_37529673_1_1_1_1,00.html\"",
+            "author": [
+                {
+                    "family": "Directorate for Science",
+                    "given": "Technology"
+                },
+                {
+                    "family": "Industry",
+                    "given": "Information"
+                },
+                {
+                    "family": "Policy",
+                    "given": "Communications"
+                }
+            ],
+            "id": "OECD:BS",
+            "issued": {
+                "date-parts": [
+                    [
+                        2006
+                    ]
+                ]
+            },
+            "title": "\"ECD Broadband Statistics\"",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Rheingold",
+                    "given": "H."
+                }
+            ],
+            "id": "Rheingold:TFT",
+            "issued": {
+                "date-parts": [
+                    [
+                        2000
+                    ]
+                ]
+            },
+            "publisher": "The MIT Press",
+            "title": "Tools for Thought: The History and Future of Mind-Expanding Technology",
+            "title-short": "Tools for Thought",
+            "type": "book"
+        },
+        {
+            "ISBN": "970-26-0162-2",
+            "author": [
+                {
+                    "family": "Tanenbaum",
+                    "given": "A."
+                }
+            ],
+            "id": "Tanenbaum:CN",
+            "issued": {
+                "date-parts": [
+                    [
+                        2003
+                    ]
+                ]
+            },
+            "publisher": "Prentice Hall",
+            "title": "Redes de Computadoras, 4a Ed.",
+            "type": "book"
+        },
+        {
+            "ISBN": "84-481-3197-5",
+            "author": [
+                {
+                    "family": "Leon-Garcia",
+                    "given": "A."
+                },
+                {
+                    "family": "Indra",
+                    "given": "W."
+                }
+            ],
+            "id": "LeonG:RC",
+            "issued": {
+                "date-parts": [
+                    [
+                        2002
+                    ]
+                ]
+            },
+            "publisher": "McGrawHill",
+            "title": "Redes de Comunicación. Conceptos fundamentales y arquitecturas básicas",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Metcalfe",
+                    "given": "R."
+                },
+                {
+                    "family": "Boggs",
+                    "given": "D."
+                }
+            ],
+            "container-title": "Communications of the ACM",
+            "id": "Metcalfe:CACM",
+            "issue": "5",
+            "issued": {
+                "date-parts": [
+                    [
+                        1976
+                    ]
+                ]
+            },
+            "page": "395-405",
+            "title": "Ethernet: Distributed Packet Switching for Local Computer Networks",
+            "title-short": "Ethernet",
+            "type": "article-journal",
+            "volume": "19"
+        },
+        {
+            "author": [
+                {
+                    "family": "Schneidermar",
+                    "given": "R."
+                }
+            ],
+            "container-title": "IEEE Press",
+            "id": "Schneidermar:IEEE",
+            "issued": {
+                "date-parts": [
+                    [
+                        1994
+                    ]
+                ]
+            },
+            "title": "Wireless Personal Communications. : The Future of Talk",
+            "title-short": "Wireless Personal Communications. ",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Bantz",
+                    "given": "D."
+                },
+                {
+                    "family": "Bauchot",
+                    "given": "F."
+                }
+            ],
+            "container-title": "IEEE Network",
+            "id": "Bantz:IEEE",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1994
+                    ]
+                ]
+            },
+            "page": "43-53",
+            "title": "Wireless LAN Design Alternatives",
+            "type": "article-journal",
+            "volume": "5"
+        },
+        {
+            "author": [
+                {
+                    "family": "Links",
+                    "given": "C."
+                },
+                {
+                    "family": "Diepstraten",
+                    "given": "W."
+                },
+                {
+                    "family": "Hayes",
+                    "given": "V."
+                }
+            ],
+            "container-title": "Byte",
+            "id": "Links:Byte",
+            "issued": {
+                "date-parts": [
+                    [
+                        1994
+                    ]
+                ]
+            },
+            "title": "Universal Wreless LANs",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Chen",
+                    "given": "K."
+                }
+            ],
+            "container-title": "IEEE Network",
+            "id": "Chen:IEEE",
+            "issued": {
+                "date-parts": [
+                    [
+                        1994
+                    ]
+                ]
+            },
+            "title": "Medium Access Control of Wireless LANs for Mobile Computing Network",
+            "type": "article-journal"
         },
         {
             "URL": "https://www.R-project.org/",
